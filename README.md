@@ -21,7 +21,7 @@ A simple Spring Boot To-Do web app to manage daily tasks efficiently.
 |-------|-------------|
 | Backend | Spring Boot 3, Spring MVC |
 | Frontend | Thymeleaf, HTML5, CSS3, JavaScript |
-| Database | H2 / MySQL |
+| Database | MySQL |
 | Build Tool | Maven |
 | IDE | IntelliJ IDEA / VS Code / Eclipse |
 
