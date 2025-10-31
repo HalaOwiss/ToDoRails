@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add TODO Task :: ToDo Rails</title>
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/addtask.css?v=11}">
+
+    <!-- ✅ Choices.js for dropdowns -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+    <!-- ✅ Flatpickr for styled calendar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+</head>
+
+<body>
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="~{fragments/menu :: menu}"></div>
+
+    <!-- Header -->
+    <div class="header" th:fragment="header">
+        <div class="logo-section">
+            <img th:src="@{/images/logo.png}" alt="ToDo Rails Logo" class="logo">
+            <div class="text-section">
+                <h1>ToDo Rails</h1>
+                <p>Keep Your Goals on Track</p>
+            </div>
+            <div class="heading-section">
+                <img th:src="@{/images/add.png}" alt="Add icon" />
+                Add TODO
+            </div>
+        </div>
+        <div class="auth-links">
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Add TODO Task</h2>
+
+        <div th:if="${successMessage}" class="client-alert flash-alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${errorMessage}" class="client-alert flash-alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <div id="error-messages-client" class="client-alert flash-alert-danger" style="display:none;">
+            <h2>Please correct the following errors:</h2>
+            <ul id="error-list"></ul>
+        </div>
+
+        <!-- Task Form -->
+        <form action="/addtask" method="post" th:object="${task}" class="task-form" onsubmit="return validateForm()">
+
+            <!-- TODO Name -->
+            <label for="todoName">TODO Name</label>
+            <input type="text" id="todoName" th:field="*{title}" placeholder="Name here...">
+            <p class="error-message" id="todoNameError"></p>
+
+            <!-- Description -->
+            <label for="description">TODO Task Description</label>
+            <textarea id="description" th:field="*{description}" placeholder="Enter task description" rows="5"></textarea>
+            <p class="error-message" id="descriptionError"></p>
+
+            <!-- Priority -->
+            <label for="priority">Priority</label>
+            <select id="priority" th:field="*{priority}">
+                <option value="">Select Priority</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+            <p class="error-message" id="priorityError"></p>
+
+            <!-- Due Date -->
+            <label for="dueDate">Due Date</label>
+            <input type="text" id="dueDate" th:field="*{dueDate}" placeholder="Select due date">
+            <p class="error-message" id="dueDateError"></p>
+
+            <!-- Type -->
+            <label for="type">Type</label>
+            <select id="type" th:field="*{type}">
+                <option value="">Select Type</option>
+                <option value="official">Official</option>
+                <option value="family">Family</option>
+                <option value="personal">Personal</option>
+            </select>
+            <p class="error-message" id="typeError"></p>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-create">Create Task</button>
+                <button type="button" id="btn-cancel" class="btn btn-cancel" onclick="window.location='/dashboard'">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/js/menu.js}"></script>
+<script th:src="@{/js/addtask.js}"></script>
+
+<!-- ✅ Choices.js -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- ✅ Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize custom dropdowns
+      new Choices('#priority', {
+        searchEnabled: false,
+        itemSelectText: '',
+        shouldSort: false
+      });
+      new Choices('#type', {
+        searchEnabled: false,
+        itemSelectText: '',
+        shouldSort: false
+      });
+
+      // ✅ FIXED: Attach Flatpickr calendar inside the container
+      const container = document.querySelector('.container');
+      flatpickr("#dueDate", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        altInput: true,
+        altFormat: "F j, Y",
+        allowInput: true,
+        appendTo: container, // <--- This keeps it inside the container box
+        position: "below center"
+      });
+    });
+</script>
+
+
+</body>
+</html>

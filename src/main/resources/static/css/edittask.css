@@ -1,0 +1,185 @@
+/* ============================================= */
+/* EDIT TASK PAGE — Consistent with Add Task */
+/* ============================================= */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #F6FAFD;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* ============================================= */
+/* Container Card */
+/* ============================================= */
+.container {
+  width: 95%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #E8F8FD;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ============================================= */
+/* Inputs and Labels */
+/* ============================================= */
+.container label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #004733;
+}
+
+.container input[type="text"],
+.container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 15px;
+  background-color: #fff;
+  color: #333;
+}
+
+.container textarea {
+  resize: none;
+}
+
+/* ============================================= */
+/* Choices.js Custom Dropdowns */
+/* ============================================= */
+.choices {
+  margin-top: 5px;
+}
+
+.choices__inner {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 45px;
+  font-size: 15px;
+}
+
+.choices__list--dropdown {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.choices__item--selectable.is-highlighted {
+  background-color: #E0F0E9;
+  color: #004733;
+}
+
+/* ============================================= */
+/* Flatpickr Calendar */
+/* ============================================= */
+.flatpickr-calendar {
+  z-index: 10000 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ============================================= */
+/* Buttons */
+/* ============================================= */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+}
+
+.btn-update {
+  background-color: #007BFF;
+}
+
+.btn-update:hover {
+  background-color: #0056b3;
+}
+
+.btn-cancel {
+  background-color: #DC3545;
+}
+
+.btn-cancel:hover {
+  background-color: #b71c1c;
+}
+
+/* ============================================= */
+/* Responsive Layout */
+/* ============================================= */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+/* ============================================= */
+/* ✅ FULL-PAGE LAYOUT FIX FOR FOOTER */
+/* ============================================= */
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full viewport height */
+}
+
+/* Make main content grow to fill remaining space */
+.container {
+  flex: 1;
+  width: 95%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #E8F8FD;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Footer always at the bottom */
+footer {
+  background: #063519;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 10px 10px 0 0;
+  margin-top: auto; /* pushes footer down */
+}
